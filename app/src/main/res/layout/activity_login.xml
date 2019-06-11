@@ -11,43 +11,49 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="52dp"
         android:text="IP:"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/editText"
-        tools:layout_editor_absoluteY="16dp" />
+        app:layout_constraintEnd_toStartOf="@+id/editText4"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="108dp"
         android:fontFamily="sans-serif"
         android:text="Port:"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/editText2"
-        tools:layout_editor_absoluteY="71dp" />
+        app:layout_constraintEnd_toStartOf="@+id/editText5"
+        app:layout_constraintHorizontal_bias="0.46"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editText"
-        android:layout_width="wrap_content"
+        android:id="@+id/editText4"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
+        android:layout_marginEnd="76dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="102dp" />
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editText2"
-        android:layout_width="wrap_content"
+        android:id="@+id/editText5"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="76dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name"
-        app:layout_constraintTop_toBottomOf="@+id/editText"
-        tools:layout_editor_absoluteX="102dp" />
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText4" />
 
 </android.support.constraint.ConstraintLayout>
