@@ -12,6 +12,7 @@ public class Client {
     private int port;
     private Socket client;
     private DataInputStream in;
+    private boolean isConnected;
 
     public Client (String IP, int port) {
             this.IP = IP;
@@ -21,7 +22,10 @@ public class Client {
     public void Connect(){
         try {
             System.out.println("Connecting to " + this.IP + " on port " + this.port);
-            this.client = new Socket(this.IP, this.port);
+            while (!isConnected) {
+                this.client = new Socket(this.IP, this.port);
+            }
+            isConnected = true;
             System.out.println("Just connected to " + this.client.getRemoteSocketAddress());
         } catch (IOException e) {
             e.printStackTrace();
