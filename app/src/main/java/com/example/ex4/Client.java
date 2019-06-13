@@ -1,5 +1,8 @@
 package com.example.ex4;
 
+import android.util.Log;
+
+import java.io.Console;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -8,39 +11,53 @@ import java.io.OutputStream;
 import java.net.Socket;
 
 public class Client {
-    private String IP;
-    private int port;
-    private Socket client;
-    private DataInputStream in;
-    private boolean isConnected;
+    protected String IP;
+    protected int port;
+    protected Socket client;
+    protected DataInputStream in;
+    protected boolean isConnected;
 
-    public Client(String IP, int port) {
-        this.IP = IP;
-        this.port = port;
+    public Client (String IP, int port) {
+            this.IP = IP;
+            this.port = port;
+            client=null;
     }
 
-    public void Connect() {
+    public void Connect(){
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    System.out.println("Connecting to " + IP + " on port " + port);
+                    client = new Socket(IP, port);
+                    isConnected = true;
+                    System.out.println("Just connected to " + client.getRemoteSocketAddress());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        Thread thread = new Thread(runnable);
+        thread.start();
+    }
+
+    public void WriteToServer(String string){
+
         try {
-            System.out.println("Connecting to " + this.IP + " on port " + this.port);
-            this.client = new Socket(this.IP, this.port);
-            isConnected = true;
-            System.out.println("Just connected to " + this.client.getRemoteSocketAddress());
+            if(client!=null){
+                OutputStream outToServer = this.client.getOutputStream();
+                DataOutputStream out = new DataOutputStream(outToServer);
+                out.writeUTF(string);
+            }
+            else{
+                Log.d("myDeb","cannot write");
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void WriteToServer(String string) {
-        try {
-            OutputStream outToServer = this.client.getOutputStream();
-            DataOutputStream out = new DataOutputStream(outToServer);
-            out.writeUTF(string);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public String ReadFromServer() {
+    public String ReadFromServer(){
         String serverAns = "";
         try {
             InputStream inFromServer = this.client.getInputStream();
@@ -52,7 +69,7 @@ public class Client {
         return serverAns;
     }
 
-    public void CloseConnection() {
+    public void CloseConnection(){
         try {
             System.out.println("Server says " + this.in.readUTF());
             this.client.close();

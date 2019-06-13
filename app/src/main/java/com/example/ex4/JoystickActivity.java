@@ -22,15 +22,8 @@ public class JoystickActivity extends AppCompatActivity {
 
         //connect to server
         client = new Client(ip, port);
+        client.Connect();
 
-        Runnable runnable = new Runnable() {
-            @Override
-            public void run() {
-                client.Connect();
-            }
-        };
-        Thread thread = new Thread(runnable);
-        thread.start();
 
         JoystickView joystickView = new JoystickView(this, client);
 
