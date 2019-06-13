@@ -68,6 +68,9 @@ public class JoystickView extends SurfaceView implements SurfaceHolder.Callback,
     }
 
     public boolean onTouch(View v, MotionEvent e) {
+        String aileronSet;
+        String elevatorSet;
+
         if ((e.getAction() != MotionEvent.ACTION_UP) && (e.getAction() != MotionEvent.ACTION_CANCEL)) {
             float currentX = e.getX();
             float currentY = e.getY();
@@ -75,14 +78,23 @@ public class JoystickView extends SurfaceView implements SurfaceHolder.Callback,
             float normalY = (currentY - (this.height / 2)) / (bigR * 2 / 3);
             if (Math.sqrt(Math.pow(normalX, 2) + Math.pow(normalY, 2)) <= 1) {
                 drawInXY(currentX, currentY);
-                String aileronSet = "set controls/flight/aileron " + normalX + "\r\n";
-                String elevatorSet = "set controls/flight/elevator " + normalY + "\r\n";
+                aileronSet = "set controls/flight/aileron " + normalX + "\r\n";
+                elevatorSet = "set controls/flight/elevator " + normalY + "\r\n";
+            }
+            else{
+                return true;
             }
         } else {
             drawInXY(this.width / 2, this.height / 2);
-            String aileronSet = "set controls/flight/aileron " + "0" + "\r\n";
-            String elevatorSet = "set controls/flight/elevator " + "0" + "\r\n";
+            aileronSet = "set controls/flight/aileron " + "0" + "\r\n";
+            elevatorSet = "set controls/flight/elevator " + "0" + "\r\n";
         }
+//        Runnable runnable = () -> {
+//            client.WriteToServer(aileronSet);
+//            client.WriteToServer(elevatorSet);
+//        };
+//        Thread thread = new Thread(runnable);
+//        thread.start();
         return true;
     }
 }

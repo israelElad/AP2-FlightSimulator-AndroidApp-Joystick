@@ -20,7 +20,7 @@ public class LoginActivity extends AppCompatActivity {
         EditText editTextIp = findViewById(R.id.ipText);
         intent.putExtra("IP", editTextIp.getText().toString());
         EditText editTextPort = findViewById(R.id.portText);
-        intent.putExtra("Port", editTextPort.getText());
+        intent.putExtra("Port", Integer.parseInt(editTextPort.getText().toString()));
         startActivity(intent);
     }
 }
