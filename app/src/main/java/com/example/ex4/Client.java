@@ -14,17 +14,15 @@ public class Client {
     private DataInputStream in;
     private boolean isConnected;
 
-    public Client (String IP, int port) {
-            this.IP = IP;
-            this.port = port;
+    public Client(String IP, int port) {
+        this.IP = IP;
+        this.port = port;
     }
 
-    public void Connect(){
+    public void Connect() {
         try {
             System.out.println("Connecting to " + this.IP + " on port " + this.port);
-            while (!isConnected) {
-                this.client = new Socket(this.IP, this.port);
-            }
+            this.client = new Socket(this.IP, this.port);
             isConnected = true;
             System.out.println("Just connected to " + this.client.getRemoteSocketAddress());
         } catch (IOException e) {
@@ -32,7 +30,7 @@ public class Client {
         }
     }
 
-    public void WriteToServer(String string){
+    public void WriteToServer(String string) {
         try {
             OutputStream outToServer = this.client.getOutputStream();
             DataOutputStream out = new DataOutputStream(outToServer);
@@ -42,7 +40,7 @@ public class Client {
         }
     }
 
-    public String ReadFromServer(){
+    public String ReadFromServer() {
         String serverAns = "";
         try {
             InputStream inFromServer = this.client.getInputStream();
@@ -54,7 +52,7 @@ public class Client {
         return serverAns;
     }
 
-    public void CloseConnection(){
+    public void CloseConnection() {
         try {
             System.out.println("Server says " + this.in.readUTF());
             this.client.close();
