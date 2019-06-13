@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#D75365E6"
+    android:background="@drawable/sky"
     tools:context=".LoginActivity">
 
     <TextView
@@ -13,7 +13,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="52dp"
-        android:text="IP:"
+        android:text="@string/ip"
+        android:textSize="36sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -25,7 +26,8 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="108dp"
         android:fontFamily="sans-serif"
-        android:text="Port:"
+        android:text="@string/port"
+        android:textSize="36sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -66,14 +68,16 @@
 
     <Button
         android:id="@+id/button"
-        android:layout_width="109dp"
-        android:layout_height="65dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="44dp"
-        android:backgroundTint="#8BC34A"
+        android:backgroundTint="#275CB8"
         android:onClick="onConnect"
-        android:text="Connect"
+        android:text="@string/connect"
+        android:textColor="#FFFFFFFF"
+        android:textSize="36sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
