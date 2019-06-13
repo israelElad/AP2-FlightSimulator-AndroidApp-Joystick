@@ -89,12 +89,15 @@ public class JoystickView extends SurfaceView implements SurfaceHolder.Callback,
             aileronSet = "set controls/flight/aileron " + "0" + "\r\n";
             elevatorSet = "set controls/flight/elevator " + "0" + "\r\n";
         }
-//        Runnable runnable = () -> {
-//            client.WriteToServer(aileronSet);
-//            client.WriteToServer(elevatorSet);
-//        };
-//        Thread thread = new Thread(runnable);
-//        thread.start();
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                client.WriteToServer(aileronSet);
+                client.WriteToServer(elevatorSet);
+            }
+        };
+        Thread thread = new Thread(runnable);
+        thread.start();
         return true;
     }
 }
