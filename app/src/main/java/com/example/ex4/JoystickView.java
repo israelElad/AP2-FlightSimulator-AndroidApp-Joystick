@@ -70,7 +70,6 @@ public class JoystickView extends SurfaceView implements SurfaceHolder.Callback,
     public boolean onTouch(View v, MotionEvent e) {
         String aileronSet;
         String elevatorSet;
-
         if ((e.getAction() != MotionEvent.ACTION_UP) && (e.getAction() != MotionEvent.ACTION_CANCEL)) {
             float currentX = e.getX();
             float currentY = e.getY();
