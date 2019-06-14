@@ -45,6 +45,7 @@ public class JoystickView extends SurfaceView implements SurfaceHolder.Callback,
         this.bigR = Math.min(this.width, this.height) / 2 - 10;
     }
 
+    /* draw the joystick on the point x,y */
     public void drawInXY(float x, float y) {
         Canvas canvas = this.getHolder().lockCanvas();
         Paint paint = new Paint();
@@ -68,35 +69,39 @@ public class JoystickView extends SurfaceView implements SurfaceHolder.Callback,
     }
 
     public boolean onTouch(View v, MotionEvent e) {
-        String aileronSet;
-        String elevatorSet;
+        // if the joystick on touch - draw it on the specific place on screen + update the server
         if ((e.getAction() != MotionEvent.ACTION_UP) && (e.getAction() != MotionEvent.ACTION_CANCEL)) {
             float currentX = e.getX();
             float currentY = e.getY();
             float normalX = (currentX - (this.width / 2)) / (bigR * 2 / 3);
             float normalY = (currentY - (this.height / 2)) / (bigR * 2 / 3);
+            // checks if the touch is only in the Circle limitations
             if (Math.sqrt(Math.pow(normalX, 2) + Math.pow(normalY, 2)) <= 1) {
                 drawInXY(currentX, currentY);
-                aileronSet = "set controls/flight/aileron " + normalX + "\r\n";
-                elevatorSet = "set controls/flight/elevator " + normalY + "\r\n";
+                String aileronSet = "set controls/flight/aileron " + normalX + "\r\n";
+                String elevatorSet = "set controls/flight/elevator " + normalY + "\r\n";
+                sendSet(aileronSet, elevatorSet);
             }
-            else{
-                return true;
-            }
+            // else, return it to the center + update the server
         } else {
             drawInXY(this.width / 2, this.height / 2);
-            aileronSet = "set controls/flight/aileron " + "0" + "\r\n";
-            elevatorSet = "set controls/flight/elevator " + "0" + "\r\n";
+            String aileronSet = "set controls/flight/aileron " + "0" + "\r\n";
+            String elevatorSet = "set controls/flight/elevator " + "0" + "\r\n";
+            sendSet(aileronSet, elevatorSet);
         }
+        return true;
+    }
+
+    /* update the server */
+    public void sendSet(final String set1, final String set2){
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
-                client.WriteToServer(aileronSet);
-                client.WriteToServer(elevatorSet);
+                client.WriteToServer(set1);
+                client.WriteToServer(set2);
             }
         };
         Thread thread = new Thread(runnable);
         thread.start();
-        return true;
     }
 }

@@ -15,6 +15,8 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
     }
 
+    /* When the user click the connect button, a request to connect to the server will be sent
+     and the user will switch to the joystick's activity */
     public void onConnect(View view) {
         Intent intent = new Intent(this, JoystickActivity.class);
         EditText editTextIp = findViewById(R.id.ipText);

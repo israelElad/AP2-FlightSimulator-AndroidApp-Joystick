@@ -15,6 +15,8 @@ public class JoystickActivity extends AppCompatActivity {
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
         // get the extras from intent
         Intent intent=getIntent();
         String ip= intent.getStringExtra("IP");
@@ -24,10 +26,14 @@ public class JoystickActivity extends AppCompatActivity {
         client = new Client(ip, port);
         client.Connect();
 
-
+        // create the joystick view
         JoystickView joystickView = new JoystickView(this, client);
-
-        super.onCreate(savedInstanceState);
         setContentView(joystickView);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        client.CloseConnection();
     }
 }

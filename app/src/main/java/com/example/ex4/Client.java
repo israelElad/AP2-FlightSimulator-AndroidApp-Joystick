@@ -19,6 +19,7 @@ public class Client {
             client=null;
     }
 
+    /* connect to server */
     public void Connect(){
         Runnable runnable = new Runnable() {
             @Override
@@ -38,6 +39,7 @@ public class Client {
         thread.start();
     }
 
+    /* write msg to the server */
     public void WriteToServer(String msg){
         byte[] msgAsBytes = msg.getBytes();
         try {
@@ -53,10 +55,12 @@ public class Client {
         }
     }
 
+    /* close the connection with the server */
     public void CloseConnection(){
         try {
             System.out.println("Server says " + this.in.readUTF());
             this.client.close();
+            isConnected = false;
         } catch (IOException e) {
             e.printStackTrace();
         }
