@@ -1,12 +1,7 @@
 package com.example.ex4;
 
-import android.util.Log;
-
-import java.io.Console;
 import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 
@@ -16,6 +11,7 @@ public class Client {
     protected Socket client;
     protected DataInputStream in;
     protected boolean isConnected;
+    protected OutputStream outputStream;
 
     public Client (String IP, int port) {
             this.IP = IP;
@@ -30,6 +26,7 @@ public class Client {
                 try {
                     System.out.println("Connecting to " + IP + " on port " + port);
                     client = new Socket(IP, port);
+                    outputStream = client.getOutputStream();
                     isConnected = true;
                     System.out.println("Just connected to " + client.getRemoteSocketAddress());
                 } catch (IOException e) {
@@ -41,32 +38,19 @@ public class Client {
         thread.start();
     }
 
-    public void WriteToServer(String string){
-
+    public void WriteToServer(String msg){
+        byte[] msgAsBytes = msg.getBytes();
         try {
             if(client!=null){
-                OutputStream outToServer = this.client.getOutputStream();
-                DataOutputStream out = new DataOutputStream(outToServer);
-                out.writeUTF(string);
+                outputStream.write(msgAsBytes, 0, msgAsBytes.length);
+                outputStream.flush();
             }
             else{
-                Log.d("myDeb","cannot write");
+                System.out.println("client==null");
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public String ReadFromServer(){
-        String serverAns = "";
-        try {
-            InputStream inFromServer = this.client.getInputStream();
-            this.in = new DataInputStream(inFromServer);
-            serverAns = this.in.readUTF();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return serverAns;
     }
 
     public void CloseConnection(){

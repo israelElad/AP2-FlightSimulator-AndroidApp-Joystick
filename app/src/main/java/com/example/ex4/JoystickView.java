@@ -95,7 +95,6 @@ public class JoystickView extends SurfaceView implements SurfaceHolder.Callback,
                 client.WriteToServer(elevatorSet);
             }
         };
-
         Thread thread = new Thread(runnable);
         thread.start();
         return true;
