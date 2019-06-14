@@ -13,14 +13,14 @@ public class Client {
     protected boolean isConnected;
     protected OutputStream outputStream;
 
-    public Client (String IP, int port) {
-            this.IP = IP;
-            this.port = port;
-            client=null;
+    public Client(String IP, int port) {
+        this.IP = IP;
+        this.port = port;
+        client = null;
     }
 
     /* connect to server */
-    public void Connect(){
+    public void Connect() {
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
@@ -40,14 +40,13 @@ public class Client {
     }
 
     /* write msg to the server */
-    public void WriteToServer(String msg){
+    public void WriteToServer(String msg) {
         byte[] msgAsBytes = msg.getBytes();
         try {
-            if(client!=null){
+            if (client != null) {
                 outputStream.write(msgAsBytes, 0, msgAsBytes.length);
                 outputStream.flush();
-            }
-            else{
+            } else {
                 System.out.println("client==null");
             }
         } catch (IOException e) {
@@ -56,11 +55,14 @@ public class Client {
     }
 
     /* close the connection with the server */
-    public void CloseConnection(){
+    public void CloseConnection() {
         try {
-            System.out.println("Server says " + this.in.readUTF());
-            this.client.close();
-            isConnected = false;
+            if (client != null) {
+                this.client.close();
+                isConnected = false;
+            } else {
+                System.out.println("client==null");
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -20,8 +20,11 @@ public class LoginActivity extends AppCompatActivity {
     public void onConnect(View view) {
         Intent intent = new Intent(this, JoystickActivity.class);
         EditText editTextIp = findViewById(R.id.ipText);
-        intent.putExtra("IP", editTextIp.getText().toString());
         EditText editTextPort = findViewById(R.id.portText);
+        if(editTextIp.getText().toString().equals("")||editTextPort.getText().toString().equals("")){
+            return;
+        }
+        intent.putExtra("IP", editTextIp.getText().toString());
         intent.putExtra("Port", Integer.parseInt(editTextPort.getText().toString()));
         startActivity(intent);
     }
