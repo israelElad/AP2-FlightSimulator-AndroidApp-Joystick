@@ -8,8 +8,8 @@ in order to get it to work:
  
 --telnet=socket,in,10,127.0.0.1,5400,tcp
 
-2. Find your PC's IP(cmd --> ipconfig)
+2. Find your PC's IP(cmd --> ipconfig --> IPv4)
 
-3. In your Android device, Connect to the same network as your PC, Open the app, and enter the IP from the previous section.
+3. In your Android device, Connect to the same network as your PC, Open the app, and enter the IP from the previous section, with port 5400.
 
 Enjoy! :)
