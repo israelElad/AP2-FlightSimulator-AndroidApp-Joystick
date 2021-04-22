@@ -8,7 +8,7 @@ Second year second semester- "Advanced programming 2" course- Android app- joyst
   <img src="https://user-images.githubusercontent.com/45766976/115225227-83f29e00-a116-11eb-826a-3b7be488072f.png" width="440">
 </p>
 
-An Android app- Joystick, which connects to FlightGear simulator and changes the aileron and elevator values of the plane. <br/>
+A Joystick Android app which connects to FlightGear simulator and changes the aileron and elevator values of the plane. <br/>
 The app allows the user to connect to the FlightGear flight simulator and remote control an aircraft with a joystick.<br/>
 The app contains the following Activities:
 
